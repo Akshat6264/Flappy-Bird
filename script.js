@@ -114,6 +114,8 @@ function update() {
         context.font = "35px sans-serif";
         context.fillText("Score: ", 45, 340);
         context.fillText(score, 150, 342);
+        context.font = "30px sans-serif";
+        context.fillText("Press Enter To Restart", 32, 390);
     }
 }
 
@@ -149,14 +151,15 @@ function placePipes() {
 function moveBird(e) {
     if(e.code == "Space" || e.code == "ArrowUp" || e.type == "click") {
         velocityY = -6;
-
-        // Reset Game
-        if(gameOver) {
-            bird.y = birdY;
-            pipeArray = [];
-            score = 0;
-            gameOver = false;
-        }
+    }
+        
+    // Reset Game
+    if(e.code == "Enter" && gameOver) {
+        bird.y = birdY;
+        pipeArray = [];
+        velocityY = -2;
+        score = 0;
+        gameOver = false;
     }
 }
 
