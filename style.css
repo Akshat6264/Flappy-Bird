@@ -3,6 +3,11 @@ body {
     text-align: center;
 }
 
+.board {
+    max-width: 100%;
+    height: auto;
+}
+
 #board {
     /* background-color: skyblue; */
     background-image: url(./Images/flappybirdbg.png);
