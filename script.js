@@ -136,6 +136,8 @@ function update() {
         context.fillText(highestScore, 280, 340);
         context.fillText("Current Score: ", 45, 380);
         context.fillText(currentScore, 280, 380);
+        context.font = "29px sans-serif";
+        context.fillText("Press Enter to Restart", 45, 420);
         // context.drawImage(restartButtonImg, restartButton.x, restartButton.y, restartButton.width, restartButton.height);
     }
 }
