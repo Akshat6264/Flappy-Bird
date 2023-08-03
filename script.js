@@ -48,7 +48,7 @@ let velocityY = 0; // Bird jump speed.
 let gravity = 0.4;
 
 let gameOver = false;
-let highestScore = 0;
+let highScore = 0;
 let currentScore = 0;
 
 window.onload = function() {
@@ -106,6 +106,10 @@ function update() {
             pipe.passed = true; 
         }
 
+        if(highScore < currentScore) {
+            highScore = currentScore;
+        }
+
         if(detectCollision(bird, pipe)){
             gameOver = true;
         }
@@ -119,21 +123,20 @@ function update() {
     // Score
     if(!gameOver) {
         context.fillStyle = "white";
-        context.font = "45px sans-serif";
-        context.fillText(currentScore, 5, 45);
+        context.font = "30px sans-serif";
+        context.fillText("HI", 180, 45);
+        context.fillText(highScore, 230, 45);
+        context.fillText(currentScore, 290, 45);
     } 
 
     // restartButtonImg = new Image();
     // restartButtonImg.src = "./Images/restart.svg";
 
     if(gameOver) {
-        if(highestScore < currentScore) {
-            highestScore = currentScore;
-        }
         context.fillText("GAME OVER", 45, 300);
         context.font = "35px sans-serif";
-        context.fillText("Highest Score: ", 45, 340);
-        context.fillText(highestScore, 280, 340);
+        context.fillText("High Score: ", 45, 340);
+        context.fillText(highScore, 230, 340);
         context.fillText("Current Score: ", 45, 380);
         context.fillText(currentScore, 280, 380);
         context.font = "29px sans-serif";
