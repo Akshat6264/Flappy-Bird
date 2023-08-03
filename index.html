@@ -12,16 +12,16 @@
     <!-- <button id="restartButton" style="display: none;">Restart</button> -->
     <script>
         if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
+          window.addEventListener('load', () => {
             navigator.serviceWorker.register('service-worker.js')
-            .then(registration => {
+              .then(registration => {
                 console.log('Service Worker registered successfully:', registration.scope);
-            })
-            .catch(error => {
+              })
+              .catch(error => {
                 console.log('Service Worker registration failed:', error);
-            });
-        });
-    }
+              });
+          });
+        }
     </script>
 </body>
 </html>
