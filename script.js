@@ -18,6 +18,20 @@ let bird = {
     height : birdHeight
 }
 
+// Restart Button
+// let restartButtonWidth = 40;
+// let restartButtonHeight = 40;
+// let restartButtonX = boardWidth/2.5;
+// let restartButtonY = boardHeight/1.8;
+// let restartButtonImg;
+
+// let restartButton = {
+//     x : restartButtonX,
+//     y : restartButtonY,
+//     width : restartButtonWidth,
+//     height : restartButtonHeight
+// }
+
 // Pipes
 let pipeArray = [];
 let pipeWidth = 64; // Width/height ratio = 384/3072 = 1/8
@@ -34,17 +48,17 @@ let velocityY = 0; // Bird jump speed.
 let gravity = 0.4;
 
 let gameOver = false;
-let score = 0;
+let highestScore = 0;
+let currentScore = 0;
 
 window.onload = function() {
+    // const restartButton = document.getElementById("restartButton");
     board = document.getElementById("board");
     board.height = boardHeight;
     board.width = boardWidth;
     context = board.getContext("2d"); // used for drawing on the board
 
     // draw flappy bird
-    // context.fillstyle = "blue";
-    // context.fillRect(bird.x, bird.y, bird.width, bird.height);
 
     birdImg = new Image();
     birdImg.src = "./Images/flappybird.png";
@@ -88,7 +102,7 @@ function update() {
         context.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
 
         if(!pipe.passed  && bird.x > pipe.x + pipe.width){
-            score += 0.5;
+            currentScore += 0.5;
             pipe.passed = true; 
         }
 
@@ -106,16 +120,23 @@ function update() {
     if(!gameOver) {
         context.fillStyle = "white";
         context.font = "45px sans-serif";
-        context.fillText(score, 5, 45);
+        context.fillText(currentScore, 5, 45);
     } 
 
+    // restartButtonImg = new Image();
+    // restartButtonImg.src = "./Images/restart.svg";
+
     if(gameOver) {
+        if(highestScore < currentScore) {
+            highestScore = currentScore;
+        }
         context.fillText("GAME OVER", 45, 300);
         context.font = "35px sans-serif";
-        context.fillText("Score: ", 45, 340);
-        context.fillText(score, 150, 342);
-        context.font = "30px sans-serif";
-        context.fillText("Press Enter To Restart", 32, 390);
+        context.fillText("Highest Score: ", 45, 340);
+        context.fillText(highestScore, 280, 340);
+        context.fillText("Current Score: ", 45, 380);
+        context.fillText(currentScore, 280, 380);
+        // context.drawImage(restartButtonImg, restartButton.x, restartButton.y, restartButton.width, restartButton.height);
     }
 }
 
@@ -154,11 +175,11 @@ function moveBird(e) {
     }
         
     // Reset Game
-    if(e.code == "Enter" && gameOver) {
+    if((e.code == "Enter" || e.type == "click") && gameOver) {
         bird.y = birdY;
         pipeArray = [];
-        velocityY = -2;
-        score = 0;
+        velocityY = -4;
+        currentScore = 0;
         gameOver = false;
     }
 }
